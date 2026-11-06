@@ -1,0 +1,56 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "HZL QS Suite",
+  "version": "0.1.25",
+  "identifier": "com.qspro.boq-generator",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeDevCommand": "npm run dev -- --host 127.0.0.1 --port 1420 --strictPort",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "HZL QS Suite",
+        "width": 1440,
+        "height": 820,
+        "minWidth": 1180,
+        "minHeight": 720,
+        "center": true,
+        "resizable": true,
+        "fullscreen": false,
+        "visible": true,
+        "decorations": false
+      }
+    ],
+    "security": {
+      "csp": {
+        "default-src": "'self' customprotocol: asset:",
+        "connect-src": "'self' ipc: http://ipc.localhost https://ipc.localhost https://nominatim.openstreetmap.org",
+        "img-src": "'self' asset: http://asset.localhost blob: data: https://*.tile.openstreetmap.org",
+        "style-src": "'self'",
+        "font-src": "'self' data:"
+      },
+      "devCsp": {
+        "default-src": "'self' customprotocol: asset: http://127.0.0.1:1420 http://localhost:1420",
+        "connect-src": "'self' ipc: http://ipc.localhost https://ipc.localhost http://127.0.0.1:1420 ws://127.0.0.1:1420 http://localhost:1420 ws://localhost:1420 https://nominatim.openstreetmap.org",
+        "img-src": "'self' asset: http://asset.localhost http://127.0.0.1:1420 http://localhost:1420 blob: data: https://*.tile.openstreetmap.org",
+        "style-src": "'self' 'unsafe-inline' http://127.0.0.1:1420 http://localhost:1420",
+        "font-src": "'self' data: http://127.0.0.1:1420 http://localhost:1420",
+        "script-src": "'self' 'unsafe-eval' http://127.0.0.1:1420 http://localhost:1420"
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

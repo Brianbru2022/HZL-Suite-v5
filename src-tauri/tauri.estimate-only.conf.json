@@ -1,0 +1,23 @@
+{
+  "productName": "HZL QS Estimate",
+  "identifier": "com.qspro.estimate",
+  "app": {
+    "windows": [
+      {
+        "title": "HZL QS Estimate",
+        "width": 1440,
+        "height": 820,
+        "minWidth": 1180,
+        "minHeight": 720,
+        "center": true,
+        "resizable": true,
+        "fullscreen": false,
+        "visible": true,
+        "decorations": false
+      }
+    ]
+  },
+  "bundle": {
+    "targets": ["nsis"]
+  }
+}

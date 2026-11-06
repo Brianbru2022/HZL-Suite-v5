@@ -1,0 +1,625 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.font-bill-aptos-narrow {
+  font-family: 'Aptos Narrow', Aptos, 'Arial Narrow', Arial, sans-serif;
+}
+
+@layer base {
+  /* Spacing scale: 8px base (Tailwind 2=8px, 4=16px, 6=24px, 8=32px) used for rail, top bar, and content padding. */
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply font-sans antialiased bg-surface-50 text-slate-800;
+    background-image:
+      radial-gradient(circle at top left, rgb(148 163 184 / 0.18), transparent 26%),
+      radial-gradient(circle at top right, rgb(203 213 225 / 0.2), transparent 22%),
+      linear-gradient(180deg, #fcfcfb 0%, #f6f7f7 44%, #eff2f4 100%);
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+  }
+  html.dark body {
+    @apply bg-surface-950 text-slate-100;
+    background-image:
+      radial-gradient(circle at top left, rgb(34 197 94 / 0.13), transparent 24%),
+      radial-gradient(circle at top right, rgb(30 64 47 / 0.24), transparent 22%),
+      linear-gradient(180deg, #0c1411 0%, #0e1714 42%, #101b17 100%);
+  }
+
+  ::selection {
+    background: rgb(71 100 118 / 0.18);
+    color: inherit;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  select {
+    color-scheme: light;
+  }
+
+  select option,
+  select optgroup {
+    background-color: rgb(255 255 255);
+    color: rgb(15 23 42);
+  }
+
+  html.dark select {
+    color-scheme: dark;
+  }
+
+  html.dark select option,
+  html.dark select optgroup {
+    background-color: rgb(16 28 23);
+    color: rgb(226 232 240);
+  }
+
+  html.dark select option:checked {
+    background-color: rgb(22 101 52);
+    color: rgb(255 255 255);
+  }
+
+  :focus {
+    outline: none;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-500;
+  }
+  html.dark :focus-visible {
+    @apply outline-primary-400;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(148 163 184 / 0.55) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgb(148 163 184 / 0.8), rgb(100 116 139 / 0.72));
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  html.dark *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgb(71 85 105 / 0.88), rgb(51 65 85 / 0.84));
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+}
+
+@layer utilities {
+  .progress-indeterminate {
+    animation: progress 1.5s ease-in-out infinite;
+  }
+}
+
+@layer components {
+  .workspace-shell {
+    @apply rounded-app-xl border shadow-card backdrop-blur-sm;
+    border-color: rgb(226 232 240 / 0.8);
+    background-color: rgb(255 255 255 / 0.94);
+  }
+
+  .workspace-popover-menu {
+    @apply fixed z-[9991] overflow-y-auto rounded-app-lg border shadow-app-lg;
+    border-color: rgb(226 232 240 / 0.9);
+    background-color: rgb(255 255 255 / 0.98);
+    color: rgb(30 41 59);
+  }
+
+  .workspace-rail-fixed {
+    @apply fixed bottom-0 left-24 right-0 top-0;
+  }
+
+  .workspace-rail-panel {
+    @apply fixed bottom-4 left-24 right-4 top-14;
+  }
+
+  .workspace-sidebar {
+    @apply rounded-app-lg border shadow-card;
+    border-color: rgb(226 232 240 / 0.8);
+    background-color: rgb(255 255 255 / 0.92);
+  }
+
+  .workspace-toolbar {
+    @apply rounded-app border p-2 shadow-sm;
+    border-color: rgb(226 232 240 / 0.8);
+    background-color: rgb(255 255 255 / 0.9);
+  }
+
+  .workspace-input {
+    @apply w-full rounded-app-sm border border-slate-200 bg-surface px-4 py-3 text-sm font-medium text-slate-700 outline-none transition focus:border-primary-400 dark:border-slate-600 dark:bg-surface-800 dark:text-slate-200;
+  }
+
+  .workspace-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-500 dark:border-slate-700 dark:bg-surface-800 dark:text-slate-400;
+  }
+
+  .workspace-empty {
+    @apply rounded-app-xl border border-dashed px-8 py-16 text-center shadow-sm;
+    border-color: rgb(203 213 225);
+    background-color: rgb(255 255 255 / 0.78);
+  }
+
+  .workspace-primary-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-app-sm border px-4 py-2.5 text-sm font-medium shadow-app transition;
+    border-color: rgb(22 101 52 / 0.18);
+    background: linear-gradient(180deg, rgb(34 197 94) 0%, rgb(22 163 74) 100%);
+    color: white;
+  }
+
+  .workspace-primary-btn:hover {
+    background: linear-gradient(180deg, rgb(22 163 74) 0%, rgb(21 128 61) 100%);
+  }
+
+  .workspace-secondary-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-app-sm border px-4 py-2.5 text-sm font-medium text-slate-700 transition dark:text-slate-200;
+    border-color: rgb(226 232 240 / 0.9);
+    background-color: rgb(255 255 255 / 0.92);
+  }
+
+  .workspace-secondary-btn:hover {
+    background-color: rgb(248 250 252 / 0.96);
+  }
+
+  .workspace-tertiary-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-app-sm px-4 py-2.5 text-sm font-medium text-slate-500 transition dark:text-slate-300;
+    background-color: transparent;
+  }
+
+  .workspace-compact-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-app-sm border px-3 py-2 text-xs font-semibold transition;
+    border-color: rgb(226 232 240 / 0.9);
+    background-color: rgb(255 255 255 / 0.92);
+    color: rgb(51 65 85);
+  }
+
+  .workspace-compact-btn:hover {
+    background-color: rgb(248 250 252 / 0.96);
+  }
+
+  .workspace-icon-btn {
+    @apply inline-flex items-center justify-center rounded-app-sm border p-2 text-slate-500 transition;
+    border-color: rgb(226 232 240 / 0.9);
+    background-color: rgb(255 255 255 / 0.92);
+  }
+
+  .workspace-icon-btn:hover {
+    color: rgb(30 41 59);
+    background-color: rgb(248 250 252 / 0.96);
+  }
+
+  .appraisal-workbench {
+    background:
+      linear-gradient(180deg, rgb(241 245 249 / 0.84), rgb(248 250 252 / 0.96) 34%, rgb(241 245 249 / 0.78)),
+      radial-gradient(circle at top right, rgb(95 124 143 / 0.12), transparent 34%);
+  }
+
+  .appraisal-top-panel {
+    @apply rounded-app-lg border shadow-card;
+    border-color: rgb(148 163 184 / 0.48);
+    background-color: rgb(232 242 249 / 0.96);
+  }
+
+  .appraisal-nav-panel {
+    @apply rounded-app-lg border shadow-card;
+    border-color: rgb(148 163 184 / 0.54);
+    background-color: rgb(233 238 244 / 0.94);
+  }
+
+  .appraisal-step-panel {
+    @apply rounded-app-lg border shadow-card;
+    border-color: rgb(203 213 225 / 0.86);
+    background-color: rgb(255 255 255 / 0.96);
+  }
+
+  .appraisal-step-header {
+    @apply border-b px-4 py-3;
+    border-color: rgb(226 232 240 / 0.94);
+    background:
+      linear-gradient(90deg, rgb(248 250 252 / 0.96), rgb(255 255 255 / 0.96));
+  }
+
+  .appraisal-stage-button {
+    @apply relative flex w-full items-center gap-2 rounded-app-sm border px-2.5 py-1.5 text-left text-xs font-semibold transition;
+  }
+
+  .appraisal-shell-grid {
+    @apply grid gap-3 xl:grid-cols-[16rem_minmax(0,1fr)];
+  }
+
+  .appraisal-top-pill {
+    @apply inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-semibold leading-5;
+  }
+
+  .appraisal-pill-status {
+    border-color: rgb(45 212 191 / 0.48);
+    background-color: rgb(204 251 241 / 0.58);
+    color: rgb(15 118 110);
+  }
+
+  .appraisal-pill-status-archived {
+    border-color: rgb(203 213 225 / 0.88);
+    background-color: rgb(241 245 249 / 0.88);
+    color: rgb(71 85 105);
+  }
+
+  .appraisal-pill-reference {
+    border-color: rgb(147 197 253 / 0.74);
+    background-color: rgb(219 234 254 / 0.7);
+    color: rgb(29 78 216);
+  }
+
+  .appraisal-pill-date {
+    border-color: rgb(203 213 225 / 0.9);
+    background-color: rgb(248 250 252 / 0.9);
+    color: rgb(71 85 105);
+  }
+
+  .appraisal-pill-option {
+    border-color: rgb(94 234 212 / 0.7);
+    background-color: rgb(240 253 250 / 0.86);
+    color: rgb(15 118 110);
+  }
+
+  .appraisal-pill-pack {
+    border-color: rgb(196 181 253 / 0.72);
+    background-color: rgb(237 233 254 / 0.72);
+    color: rgb(109 40 217);
+  }
+
+  .appraisal-stage-button-active {
+    border-color: rgb(95 124 143 / 0.38);
+    background-color: rgb(255 255 255 / 0.98);
+    color: rgb(15 23 42);
+    box-shadow: inset 3px 0 0 rgb(15 118 110), 0 1px 2px rgb(15 23 42 / 0.04);
+  }
+
+  .appraisal-stage-button-idle {
+    border-color: rgb(226 232 240 / 0.82);
+    background-color: rgb(248 250 252 / 0.62);
+    color: rgb(71 85 105);
+  }
+
+  .appraisal-stage-button-idle:hover {
+    background-color: rgb(255 255 255 / 0.9);
+    color: rgb(15 23 42);
+  }
+
+  .appraisal-data-surface {
+    @apply rounded-app border;
+    border-color: rgb(226 232 240 / 0.9);
+    background-color: rgb(248 250 252 / 0.72);
+  }
+
+  /* Final reports can contain evidence and sensitivity tables with many rows.
+     Defer browser layout and paint until these lower sections approach the viewport. */
+  .appraisal-report-deferred {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 44rem;
+  }
+
+  .appraisal-workbench table thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: rgb(226 232 240 / 0.82);
+  }
+
+  .appraisal-workbench table tbody tr:nth-child(even):not([class*="bg-"]) {
+    background-color: rgb(248 250 252 / 0.72);
+  }
+
+  .appraisal-workbench table th {
+    border-bottom: 1px solid rgb(203 213 225 / 0.78);
+  }
+
+  .appraisal-workbench table td {
+    border-color: rgb(226 232 240 / 0.72);
+  }
+
+  html.dark .appraisal-workbench {
+    background:
+      linear-gradient(180deg, rgb(10 18 22 / 1), rgb(15 25 31 / 0.98) 38%, rgb(12 20 24 / 1)),
+      radial-gradient(circle at top right, rgb(34 197 94 / 0.12), transparent 32%);
+  }
+
+  html.dark .appraisal-top-panel {
+    border-color: rgb(71 85 105 / 0.88);
+    background-color: rgb(20 38 48 / 0.96);
+  }
+
+  html.dark .appraisal-nav-panel {
+    border-color: rgb(71 85 105 / 0.82);
+    background-color: rgb(18 30 39 / 0.96);
+  }
+
+  html.dark .appraisal-step-panel {
+    border-color: rgb(51 65 85 / 0.86);
+    background-color: rgb(16 25 32 / 0.96);
+  }
+
+  html.dark .appraisal-step-header {
+    border-color: rgb(51 65 85 / 0.88);
+    background:
+      linear-gradient(90deg, rgb(15 23 31 / 0.98), rgb(16 25 32 / 0.96));
+  }
+
+  html.dark .appraisal-stage-button-active {
+    border-color: rgb(94 234 212 / 0.22);
+    background-color: rgb(30 41 51 / 0.9);
+    color: rgb(248 250 252);
+    box-shadow: inset 3px 0 0 rgb(45 212 191);
+  }
+
+  html.dark .appraisal-stage-button-idle {
+    border-color: rgb(51 65 85 / 0.82);
+    background-color: rgb(16 25 32 / 0.62);
+    color: rgb(203 213 225);
+  }
+
+  html.dark .appraisal-stage-button-idle:hover {
+    background-color: rgb(30 41 51 / 0.84);
+    color: rgb(248 250 252);
+  }
+
+  html.dark .appraisal-data-surface {
+    border-color: rgb(51 65 85 / 0.88);
+    background-color: rgb(10 18 22 / 0.54);
+  }
+
+  html.dark .appraisal-pill-status {
+    border-color: rgb(45 212 191 / 0.34);
+    background-color: rgb(20 83 78 / 0.32);
+    color: rgb(153 246 228);
+  }
+
+  html.dark .appraisal-pill-status-archived {
+    border-color: rgb(71 85 105 / 0.9);
+    background-color: rgb(30 41 51 / 0.72);
+    color: rgb(203 213 225);
+  }
+
+  html.dark .appraisal-pill-reference {
+    border-color: rgb(59 130 246 / 0.4);
+    background-color: rgb(30 64 175 / 0.22);
+    color: rgb(191 219 254);
+  }
+
+  html.dark .appraisal-pill-date {
+    border-color: rgb(71 85 105 / 0.88);
+    background-color: rgb(15 23 31 / 0.78);
+    color: rgb(203 213 225);
+  }
+
+  html.dark .appraisal-pill-option {
+    border-color: rgb(45 212 191 / 0.42);
+    background-color: rgb(20 83 78 / 0.24);
+    color: rgb(153 246 228);
+  }
+
+  html.dark .appraisal-pill-pack {
+    border-color: rgb(139 92 246 / 0.42);
+    background-color: rgb(76 29 149 / 0.26);
+    color: rgb(221 214 254);
+  }
+
+  html.dark .appraisal-workbench table thead {
+    background-color: rgb(24 37 45 / 0.96);
+  }
+
+  html.dark .appraisal-workbench table tbody tr:nth-child(even):not([class*="bg-"]) {
+    background-color: rgb(15 23 31 / 0.62);
+  }
+
+  html.dark .appraisal-workbench table th {
+    border-bottom-color: rgb(51 65 85 / 0.9);
+  }
+
+  html.dark .appraisal-workbench table td {
+    border-color: rgb(51 65 85 / 0.72);
+  }
+
+  .workspace-tertiary-btn:hover {
+    color: rgb(51 65 85);
+    background-color: rgb(241 245 249 / 0.82);
+  }
+
+  .workspace-tab-btn {
+    @apply inline-flex items-center justify-center rounded-full border px-3 py-2 text-xs font-semibold transition;
+    border-color: rgb(226 232 240 / 0.88);
+    background-color: rgb(248 250 252 / 0.94);
+    color: rgb(71 85 105);
+  }
+
+  .workspace-tab-btn:hover {
+    border-color: rgb(203 213 225);
+    color: rgb(30 41 59);
+  }
+
+  .workspace-tab-btn-active {
+    @apply inline-flex items-center justify-center rounded-full px-3 py-2 text-xs font-semibold shadow-app;
+    background: linear-gradient(180deg, rgb(34 197 94) 0%, rgb(22 163 74) 100%);
+    color: white;
+  }
+
+  html.dark .workspace-shell,
+  html.dark .workspace-sidebar {
+    border-color: rgb(48 68 58 / 0.9);
+    background-color: rgb(14 24 20 / 0.95);
+  }
+
+  html.dark .workspace-popover-menu {
+    border-color: rgb(48 68 58 / 0.94);
+    background-color: rgb(16 28 23 / 0.98);
+    color: rgb(226 232 240);
+  }
+
+  html.dark .workspace-toolbar {
+    border-color: rgb(48 68 58 / 0.9);
+    background-color: rgb(16 28 23 / 0.92);
+  }
+
+  html.dark .workspace-empty {
+    border-color: rgb(48 68 58 / 0.9);
+    background-color: rgb(16 28 23 / 0.8);
+  }
+
+  html.dark .workspace-primary-btn {
+    border-color: rgb(34 197 94 / 0.3);
+    background: linear-gradient(180deg, rgb(22 163 74) 0%, rgb(21 128 61) 100%);
+    color: rgb(255 255 255);
+  }
+
+  html.dark .workspace-primary-btn:hover {
+    background: linear-gradient(180deg, rgb(21 128 61) 0%, rgb(22 101 52) 100%);
+  }
+
+  html.dark .workspace-secondary-btn {
+    border-color: rgb(48 68 58 / 0.9);
+    background-color: rgb(16 28 23 / 0.92);
+    color: rgb(226 232 240);
+  }
+
+  html.dark .workspace-secondary-btn:hover {
+    border-color: rgb(74 222 128 / 0.3);
+    background-color: rgb(18 34 27 / 0.96);
+  }
+
+  html.dark .workspace-tertiary-btn:hover {
+    color: rgb(226 232 240);
+    background-color: rgb(18 34 27 / 0.92);
+  }
+
+  html.dark .workspace-compact-btn {
+    border-color: rgb(48 68 58 / 0.9);
+    background-color: rgb(16 28 23 / 0.92);
+    color: rgb(226 232 240);
+  }
+
+  html.dark .workspace-compact-btn:hover {
+    border-color: rgb(74 222 128 / 0.3);
+    background-color: rgb(18 34 27 / 0.96);
+  }
+
+  html.dark .workspace-icon-btn {
+    border-color: rgb(48 68 58 / 0.9);
+    background-color: rgb(16 28 23 / 0.92);
+    color: rgb(148 163 184);
+  }
+
+  html.dark .workspace-icon-btn:hover {
+    border-color: rgb(74 222 128 / 0.3);
+    background-color: rgb(18 34 27 / 0.96);
+    color: rgb(226 232 240);
+  }
+
+  html.dark .workspace-tab-btn {
+    border-color: rgb(48 68 58 / 0.9);
+    background-color: rgb(16 28 23 / 0.92);
+    color: rgb(148 163 184);
+  }
+
+  html.dark .workspace-tab-btn:hover {
+    border-color: rgb(74 222 128 / 0.3);
+    color: rgb(226 232 240);
+  }
+
+  html.dark .workspace-tab-btn-active {
+    background: linear-gradient(180deg, rgb(22 163 74) 0%, rgb(21 128 61) 100%);
+    color: rgb(255 255 255);
+  }
+
+  .rich-text-content {
+    color: inherit;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .rich-text-content p,
+  .rich-text-content div {
+    margin: 0;
+  }
+
+  .rich-text-content ul,
+  .rich-text-content ol {
+    margin: 0.25rem 0 0.25rem 1rem;
+    padding: 0;
+  }
+
+  .rich-text-content li {
+    margin: 0;
+  }
+
+  .rich-text-content .rt-color-slate-900 {
+    color: rgb(15 23 42);
+  }
+
+  .rich-text-content .rt-color-blue-700 {
+    color: rgb(29 78 216);
+  }
+
+  .rich-text-content .rt-color-emerald-700 {
+    color: rgb(4 120 87);
+  }
+
+  .rich-text-content .rt-color-amber-700 {
+    color: rgb(180 83 9);
+  }
+
+  .rich-text-content .rt-color-red-700 {
+    color: rgb(185 28 28);
+  }
+
+  .rich-text-content .rt-color-violet-700 {
+    color: rgb(124 58 237);
+  }
+}
+
+[data-bill-density="compact"] table tbody tr[data-bill-row-id] > td {
+  padding-top: 0.125rem !important;
+  padding-bottom: 0.125rem !important;
+}
+
+[data-bill-density="compact"] table tbody tr[data-bill-row-id] .rich-text-content {
+  line-height: 1.2;
+}
+
+@keyframes progress {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
+[data-bill-insert-anchor="true"] {
+  outline: 2px solid #10b981;
+  outline-offset: -2px;
+}

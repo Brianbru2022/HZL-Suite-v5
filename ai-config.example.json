@@ -1,0 +1,7 @@
+{
+  "provider": "gemini",
+  "apiKey": "",
+  "defaultModel": "gemini-3.1-pro-preview",
+  "analysisModel": "gemini-3.1-pro-preview",
+  "hierarchyModel": "gemini-3.1-pro-preview"
+}
